@@ -1,0 +1,51 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.calendar"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.calendar"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            // 設定你的 keystore 檔案路徑和密碼
+            storeFile file("C:\\Users\\user\\StudioProjects\\calendar\\android\\keystore\\my-release-key.jks")  // 修正路徑
+            storePassword "123456"
+            keyAlias "my-key-alias"  // 改成正確的 alias
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release  // 使用 release 簽名配置
+            minifyEnabled false  // 如果不需要混淆，則關閉
+            shrinkResources false  // 如果不需要資源縮減，則關閉
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
