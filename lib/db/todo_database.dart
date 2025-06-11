@@ -2,7 +2,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../models/todo.dart';
-import 'package:intl/intl.dart';  // 確保這個import在這裡
+// 確保這個import在這裡
 
 class TodoDatabase {
   static Database? _database;
@@ -21,7 +21,7 @@ class TodoDatabase {
       path,
       version: 1,
       onCreate: (db, version) {
-        return db.execute(''' 
+        return db.execute('''
           CREATE TABLE todos(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             date TEXT,
@@ -35,7 +35,8 @@ class TodoDatabase {
 
   static Future<void> insertTodo(Todo todo) async {
     final db = await database;
-    await db.insert('todos', todo.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert('todos', todo.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   static Future<List<Todo>> getTodosByDate(String date) async {
@@ -46,7 +47,8 @@ class TodoDatabase {
 
   static Future<void> updateTodo(Todo todo) async {
     final db = await database;
-    await db.update('todos', todo.toMap(), where: 'id = ?', whereArgs: [todo.id]);
+    await db
+        .update('todos', todo.toMap(), where: 'id = ?', whereArgs: [todo.id]);
   }
 
   static Future<void> deleteTodo(int id) async {
@@ -61,7 +63,8 @@ class TodoDatabase {
   }
 
   // 新增的範圍查詢方法，返回在指定日期範圍內的待辦事項
-  static Future<List<Todo>> getTodosInRange(DateTime startDate, DateTime endDate) async {
+  static Future<List<Todo>> getTodosInRange(
+      DateTime startDate, DateTime endDate) async {
     final db = await database;
     final start = startDate.toIso8601String().substring(0, 10);
     final end = endDate.toIso8601String().substring(0, 10);
@@ -69,7 +72,7 @@ class TodoDatabase {
       'todos',
       where: 'date BETWEEN ? AND ?',
       whereArgs: [start, end],
-      orderBy: 'date ASC',  // 按日期從舊到新排列
+      orderBy: 'date ASC', // 按日期從舊到新排列
     );
     return List.generate(maps.length, (i) => Todo.fromMap(maps[i]));
   }

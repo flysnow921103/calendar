@@ -1,25 +1,42 @@
 name: calendar
-description: A new Flutter project.
-
+description: "A new Flutter project."
 publish_to: 'none'
+version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.1
-  sqflite: ^2.3.2
+  cupertino_icons: ^1.0.2
+  google_generative_ai: ^0.2.0
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  intl: ^0.20.2
+  provider: ^6.1.5
+  sqflite: ^2.4.1
   path_provider: ^2.1.2
-  flutter_local_notifications: ^19.1.0
-  shared_preferences: ^2.2.2
-  provider: ^6.1.2
+  flutter_local_notifications: ^19.2.1
+  shared_preferences: ^2.5.3
+  firebase_core: ^3.13.1
+  firebase_auth: ^5.5.4
+  cloud_firestore: ^5.6.8
+  google_sign_in: ^6.1.6
+  firebase_storage: ^12.4.6
+  fl_chart: ^0.66.2
+  package_info_plus: ^8.3.0
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.8
+  riverpod_generator: ^2.3.11
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/google_logo.png
